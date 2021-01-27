@@ -28,6 +28,18 @@ class LocalStorage {
         todos.push(todo);
         localStorage.setItem('todos', JSON.stringify(todos));
     }
+
+    //method to remove books from local storage
+    static removeBooks(text){
+        const todos = LocalStorage.getTodos();
+        todos.forEach((todo, index) => {
+            if(todo.text === text){
+                todos.splice(index, 1);
+            }
+        })
+        //we stringify our books array because ls doesn't take in anything that's not a string 
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }
 }
 
 class UI {
@@ -42,14 +54,61 @@ class UI {
         let newItem = document.createElement("p");
         newItem.innerHTML = `${todo.text}`;
         let histPara = document.getElementById("historyPara");
-        newItem.style.margin = "20px";
-        newItem.style.display = "flex";
-        newItem.style.justifyContent = "space-between";
+        newItem.className = 'newItem'
         items.appendChild(newItem);
         let opt = document.createElement("div");
-        opt.style.width = "30%";
+        opt.style.width = "5%";
+        opt.style.display = 'flex';
+        opt.style.justifySelf =''
         //Clearing input 
         input.value = "";
+        //creating a delete button for each list item created 
+        let delbtn = document.createElement("span");
+        let delbtntxtnd = document.createElement("span");
+        delbtntxtnd.className = "material-icons md-16"
+        let spanText = document.createTextNode("delete");
+        delbtntxtnd.appendChild(spanText)
+        delbtn.appendChild(delbtntxtnd);
+        delbtn.style.padding = "5px";
+        delbtn.style.color = "red";
+        delbtn.style.cursor = "pointer";
+        histPara.className = "histParaVisible";
+        opt.appendChild(delbtn);
+
+        //function  to delete items
+        delbtn.onclick = function(){
+            let prepar = this.parentNode;
+            prepar.parentNode.remove();
+            if(items.childNodes.length < 2){
+                histPara.className = "historyPara";
+            }
+            console.log(items.childNodes.length);
+        }
+
+        //creating an edit button for each list item created 
+        let editbtn = document.createElement("span");
+        let editbtntxtnd = document.createElement("span");
+        editbtntxtnd.className = "material-icons md-16"
+        let editSpanText = document.createTextNode("edit");
+        editbtntxtnd .appendChild(editSpanText)
+        editbtn.appendChild(editbtntxtnd);
+        editbtn.style.padding = "5px";
+        editbtn.style.color = "seagreen";
+        editbtn.style.cursor = "pointer";
+        histPara.className = "histParaVisible";
+        opt.appendChild(editbtn);
+        newItem.appendChild(opt);
+        
+        //function to edit items
+        editbtn.onclick = function(){
+            var editText = prompt("");
+            var newp = document.createElement("span");
+            newp.innerHTML = editText;
+            newItem.firstChild.remove();
+            // add an if to verify empty edits 
+            newItem.insertBefore(newp, opt)
+        }
+    
     }
 }
 
@@ -58,19 +117,19 @@ document.addEventListener('DOMContentLoaded', UI.showTodos);
 /*Getting the user's name and validating that it is a string 
 but all data in a prompt are returned as strings, even numbers */
 
-body.onload = function (){
-    var yourName = prompt("what's your name?");
-    if(typeof yourName != "string"){
-        alert("Please enter a valid name");
-    } 
-    else{
-        var greetingExt = document.createElement("p");
-        var greetingExtTxt = document.createTextNode("what's New?");
-        greetingExt.appendChild(greetingExtTxt);
-        //you are writng in the same h3, that's why all text is black
-        greetingPara.innerHTML = "Hello " + "" + yourName;
-    }
-}
+// body.onload = function (){
+//     var yourName = prompt("what's your name?");
+//     if(typeof yourName != "string"){
+//         alert("Please enter a valid name");
+//     } 
+//     else{
+//         var greetingExt = document.createElement("p");
+//         var greetingExtTxt = document.createTextNode("what's New?");
+//         greetingExt.appendChild(greetingExtTxt);
+//         //you are writng in the same h3, that's why all text is black
+//         greetingPara.innerHTML = "Hello " + "" + yourName;
+//     }
+// }
 
 // input.onfocus = function(){
 //     this.style.borderColor = 'yellow';
