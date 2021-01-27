@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="todo.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=ABeeZee&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body id="body">
+    <div class="container">
+        <h3 id="header">
+            My Todo List
+        </h3>
+        <div class="container2">
+            <h4 id="greeting">
+
+            </h4>
+            <input type="text" id="input" placeholder="What's next?">
+            <br><br>
+            <button type="button" id="addBtn"><span class="material-icons md-16">
+                note_add
+                </span> new note</button>
+            <button type="button" id="deleteAllBtn"><span class="material-icons md-16">
+                delete
+                </span> delete all</button>
+            <p id="historyPara" class="historyPara">Here's a summary of your list so far</p>
+            <div id="myList">
+                <div id="items">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="todo.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+:root {
+    --mainColor:#00b7ff;
+    --subColor:lightgreen;
+}
+*{
+    font-family: ABeeZee;
+}
+body{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    height: 100vh;
+    background-color: black;
+    margin: 0;
+    padding: 0;
+}
+.container{
+    width: 400px;
+    height: auto;
+    background-color:#fafafa;
+    border-radius: 0px 0px 0px 0px;
+    border-top: 2px solid 3e3d3d;
+    overflow: hidden;
+    padding-bottom: 50px;
+}
+
+.container2{
+    padding: 0px 20px;
+    width: 100%;
+    background-color: #fafafa;
+}
+
+#header{
+    background-color: seagreen;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+#input{
+    margin: 15px 10px 0px 0px;
+    width: 80%;
+    height: 30px;
+    border: 2px solid #bbb9b9;
+}
+
+#addBtn{
+    background-color: #03b603;
+    color: white;
+    padding: 5px;
+    border: none;
+}
+#deleteAllBtn {
+    background-color: #db0303;
+    color: white;
+    padding: 5px;
+    border: none;
+    font-weight: bold;
+    
+}
+/* #addBtn:hover {
+    
+} */
+.historyPara{
+    display: none;
+    color: black;
+    transition: all 10s ease-in 10s;
+}
+
+.histParaVisible{
+    display: block;
+    padding: 5px;
+    color: black;
+    transition: all 10s ease-in 10s;
+} 
+
+#items{
+    width: 100%;
+}
+
+
+.material-icons.md-16 { 
+    font-size: 16px;
+    position: relative;
+    top: 3px;
+}
