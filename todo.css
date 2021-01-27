@@ -77,7 +77,7 @@ body{
 } 
 
 #items{
-    width: 100%;
+    width: 90%;
 }
 
 
@@ -85,4 +85,13 @@ body{
     font-size: 16px;
     position: relative;
     top: 3px;
+}
+
+.newItem {
+    margin:20px 20px 0 0px;
+    border-bottom: 2px dashed lightgrey;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    overflow-wrap:normal;
 }
