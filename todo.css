@@ -95,3 +95,15 @@ body{
     justify-content: space-between;
     overflow-wrap:normal;
 }
+
+.editButton {
+    padding: 5px;
+    color: seagreen;
+    cursor: pointer;
+}
+
+.deleteButton {
+    padding: 5px;
+    color: red;
+    cursor: pointer;
+}
