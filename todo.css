@@ -1,10 +1,7 @@
-:root {
-    --mainColor:#00b7ff;
-    --subColor:lightgreen;
-}
 *{
     font-family: ABeeZee;
 }
+
 body{
     display: flex;
     align-items:center;
@@ -14,6 +11,7 @@ body{
     margin: 0;
     padding: 0;
 }
+
 .container{
     width: 400px;
     height: auto;
@@ -52,6 +50,7 @@ body{
     padding: 5px;
     border: none;
 }
+
 #deleteAllBtn {
     background-color: #db0303;
     color: white;
@@ -60,9 +59,7 @@ body{
     font-weight: bold;
     
 }
-/* #addBtn:hover {
-    
-} */
+
 .historyPara{
     display: none;
     color: black;
@@ -78,13 +75,6 @@ body{
 
 #items{
     width: 90%;
-}
-
-
-.material-icons.md-16 { 
-    font-size: 16px;
-    position: relative;
-    top: 3px;
 }
 
 .newItem {
