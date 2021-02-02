@@ -1,5 +1,9 @@
-*{
-    font-family: ABeeZee;
+:root {
+    --mainColor:#00b7ff;
+    --subColor:lightgreen;
+}
+* {
+    font-family: 'AbeeZee';
 }
 
 body{
@@ -50,7 +54,6 @@ body{
     padding: 5px;
     border: none;
 }
-
 #deleteAllBtn {
     background-color: #db0303;
     color: white;
@@ -75,6 +78,13 @@ body{
 
 #items{
     width: 90%;
+}
+
+
+.material-icons.md-16 { 
+    font-size: 16px;
+    position: relative;
+    top: 3px;
 }
 
 .newItem {
