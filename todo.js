@@ -1,9 +1,7 @@
 var input = document.getElementById("input");
-var addBtn = document.getElementById("addBtn");
+var addButton = document.getElementById("addBtn");
 var items  = document.getElementById("items");
-var delAllBtn = document.getElementById("deleteAllBtn");
-var body = document.body;
-var greetingPara = document.getElementById("greeting");
+var delAllButton = document.getElementById("deleteAllBtn");
 let histPara = document.getElementById("historyPara");
 
 class TodoItem {
@@ -38,8 +36,6 @@ class todoStorage {
             if(todo.textItem === texts){
                 todos.splice(index, 1);
                 console.log("a match " + todo.textItem + " " + texts);
-            }else {
-                console.log("not a match " + todo.textItem + "        " + texts)
             }
         })
         //we stringify our books array because ls doesn't take in anything that's not a string 
@@ -53,6 +49,16 @@ class todoStorage {
         todos.splice(0, todos.length);
         localStorage.setItem('todos', JSON.stringify(todos));
     }
+
+    // static editTodos(){
+    //     const todos = todoStorage.getTodos();
+    //     let foundIndex = todos.findIndex((todo) =>{
+    //         todo.textItem === newItem.textContent;
+    //     });
+    //     console.log(foundIndex);
+    //     todos.splice(foundIndex, 1 , newItem);
+    //     localStorage.setItem('todos', JSON.stringify(todos));
+    // }
 }
 
 class UI {
@@ -68,44 +74,61 @@ class UI {
         newItem.innerText = `${todo.textItem}`;
         newItem.className = 'newItem';
         items.appendChild(newItem);
-        let opt = document.createElement("div");
-        opt.style.width = "5%";
-        opt.style.display = 'flex';
+
+        let todoOptions = document.createElement("div");
+        todoOptions.style.width = "5%";
+        todoOptions.style.display = 'flex';
+
         //Clearing input 
         input.value = "";
+
         //creating a delete button for each list item created 
-        let delbtn = document.createElement("button");
-        let delbtntxtnd = document.createElement("i");
-        delbtntxtnd.className = 'fas fa-trash';
-        delbtn.appendChild(delbtntxtnd);
-        delbtn.className = 'deleteButton';
+        let deleteButton = document.createElement("button");
+        let deleteButtonIcon = document.createElement("i");
+        deleteButtonIcon.className = 'fas fa-trash';
+        deleteButton.appendChild(deleteButtonIcon);
+        deleteButton.className = 'deleteButton';
         histPara.className = "histParaVisible";
-        opt.appendChild(delbtn);
+        todoOptions.appendChild(deleteButton);
 
         //creating an edit button for each list item created 
-        let editbtn = document.createElement("button");
-        let editbtntxtnd = document.createElement("i");
-        editbtntxtnd.className = "fas fa-edit";
-        editbtn.appendChild(editbtntxtnd);
-        editbtn.className = 'editButton';
+        let editButton = document.createElement("button");
+        let editButtonIcon = document.createElement("i");
+        editButtonIcon.className = "fas fa-edit";
+        editButton.appendChild(editButtonIcon);
+        editButton.className = 'editButton';
         histPara.className = "histParaVisible";
-        opt.appendChild(editbtn);
-        newItem.appendChild(opt);
+        todoOptions.appendChild(editButton);
+        newItem.appendChild(todoOptions);
         
         //function to edit items
-        editbtn.onclick = function(){
+        editButton.onclick = function(){
             var editText = prompt("");
-            var newp = document.createElement("span");
-            newp.innerHTML = editText;
-            newItem.firstChild.remove();
-            // add an if to verify empty edits 
-            newItem.insertBefore(newp, opt);
+            if(editText === ''){
+                alert('cant add an empty item');
+            }
+            else{
+                const todos = todoStorage.getTodos();
+                console.log(newItem.textContent)
+                //checking all todo items in our local storage for the one whose value matches what's in the paragraph
+                let foundIndex = todos.findIndex((todo) =>{
+                    return todo.textItem === newItem.textContent;
+                });
+                console.log(foundIndex);
+                newItem.textContent = editText;
+                todos[foundIndex] = {
+                    textItem : editText,
+                }
+                console.log(todos);
+                localStorage.setItem('todos', JSON.stringify(todos));
+                location.reload()
+            }
         }
 
-        //function to delete individual items
-        delbtn.onclick = ()=>{
-           delbtn.parentElement.parentElement.remove();
-           let textItem = delbtn.parentElement.parentElement.textContent;
+        //function to delete individual todo items
+        deleteButton.onclick = ()=>{
+           deleteButton.parentElement.parentElement.remove();
+           let textItem = deleteButton.parentElement.parentElement.textContent;
            todoStorage.removeTodos(textItem);
            if(items.children.length < 1) histPara.className = 'historyPara';
         }
@@ -119,19 +142,24 @@ class UI {
     }
 }
 
-//Displaying our books in our todoStorage 
+//Displaying our todos in our todoStorage 
 document.addEventListener('DOMContentLoaded', UI.showTodos);
 
-//adding a book to local storage annd UI
-addBtn.addEventListener("click", ()=>{
+//adding a todo item to local storage annd UI
+addButton.addEventListener("click", ()=>{
     let text = document.getElementById("input").value;
-    let newTodo = new TodoItem(text);
-    UI.addTodoToList(newTodo);
-    todoStorage.addTodos(newTodo);
+    if(text === ''){
+        alert('cant add an empty item');
+    }else {
+        let newTodo = new TodoItem(text);
+        UI.addTodoToList(newTodo);
+        todoStorage.addTodos(newTodo);
+    }
+    
 });
 
-//deleting a book from local storage and UI
- delAllBtn.addEventListener('click', ()=> {
+//deleting a todo item from local storage and UI
+ delAllButton.addEventListener('click', ()=> {
      UI.deleteAllItems(items);
      histPara.className = 'historyPara';
      todoStorage.removeAllTodos();
